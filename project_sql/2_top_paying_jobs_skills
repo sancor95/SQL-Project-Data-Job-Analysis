@@ -33,17 +33,6 @@ ORDER BY
     salary_year_avg DESC
 
 /* 
-    2 successful queries
-
-CSV icon
-top_data_a...skills_new
-CSV
-https://lh3.googleusercontent.com/gg-dl/ABS2GSlRfXbGVNpgQWRXl5o1dU8biX7psJsyUrm3pm_Y_WdmnQ64b2yfIq4jf6t2kGllZbx1XsTgvG5SVWP4n0qEXrGD7erQkV_S0VPvYV0CgIydvIk4Zfvv0PM-9IlxDe21VDalYJpjmneKDpWHx4rTT0M0WBE5c4XxkLfxI5vSHp5siwfzOw=s1600
-
-I've completed the analysis on the new dataset you provided. As requested, the analysis focuses on the skills required for the top-paying data analyst roles in this file.
-
-The key differences between this new dataset and the previous one are the inclusion of express and more backend/database-focused skills like elasticsearch, neo4j, and oracle, and the absence of certain visualization tools like Tableau from the very top.
-Top Most In-Demand Skills (New Dataset)
 
 The skills below are the most frequently required across the top-paying job postings in this file, which range from approximately $175,000 to $240,000 and include roles like Data Sector Analyst - Hedge Fund and Investigations and Insights Lead Data Analyst.
 Skill	Number of Postings
