@@ -1,0 +1,320 @@
+/*
+Question: What are the top paying analyst jobs?
+- Identify the top 10 highest-paying Data Analyst roles that are available in New York City.
+- Return job postings with specified salaries (nulls values not considered).
+- Why? It provides a detailed look at which high-oaying jobs demand certain skills, helping job seekers understand which skills to develop that align with higher-paying salaries
+*/
+
+WITH top_paying_jobs AS (
+SELECT
+    job_id,
+    job_title,
+    salary_year_avg,
+    name AS company_name
+FROM
+    job_postings_fact
+    LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
+WHERE
+    job_title_short = 'Data Analyst' AND
+    job_location = 'New York, NY' AND
+    salary_year_avg IS NOT NULL
+ORDER BY
+    salary_year_avg DESC
+LIMIT 10
+)
+
+SELECT 
+    top_paying_jobs.*,
+    skills
+FROM top_paying_jobs
+INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY
+    salary_year_avg DESC
+
+/* 
+    2 successful queries
+
+CSV icon
+top_data_a...skills_new
+CSV
+https://lh3.googleusercontent.com/gg-dl/ABS2GSlRfXbGVNpgQWRXl5o1dU8biX7psJsyUrm3pm_Y_WdmnQ64b2yfIq4jf6t2kGllZbx1XsTgvG5SVWP4n0qEXrGD7erQkV_S0VPvYV0CgIydvIk4Zfvv0PM-9IlxDe21VDalYJpjmneKDpWHx4rTT0M0WBE5c4XxkLfxI5vSHp5siwfzOw=s1600
+
+I've completed the analysis on the new dataset you provided. As requested, the analysis focuses on the skills required for the top-paying data analyst roles in this file.
+
+The key differences between this new dataset and the previous one are the inclusion of express and more backend/database-focused skills like elasticsearch, neo4j, and oracle, and the absence of certain visualization tools like Tableau from the very top.
+Top Most In-Demand Skills (New Dataset)
+
+The skills below are the most frequently required across the top-paying job postings in this file, which range from approximately $175,000 to $240,000 and include roles like Data Sector Analyst - Hedge Fund and Investigations and Insights Lead Data Analyst.
+Skill	Number of Postings
+SQL	6
+Python	6
+Excel	3
+R	3
+Express	3
+AWS	2
+Elasticsearch	1
+SQL Server	1
+Neo4j	1
+Oracle	1
+
+Here is a bar chart visualizing the demand for these top skills:
+Key Skill Insights
+
+This dataset suggests a strong focus on technical and engineering-adjacent data analysis:
+
+    The Foundational Core: SQL and Python are tied for the most in-demand skill, reinforcing their absolute necessity for these high-level roles.
+
+    Programming & Web Frameworks: The appearance of Express (a minimal Node.js web application framework) suggests that some of these roles, particularly those with an "Insights Lead" or "Hedge Fund" title, require data professionals who can build or interface with full-stack data applications and APIs.
+
+    Database Diversity: This set of jobs requires a broader knowledge of databases beyond cloud-native ones:
+
+        Elasticsearch and Neo4j (a graph database) indicate requirements for specialized data retrieval, text searching, and analyzing complex relationships within data.
+
+        SQL Server and Oracle point to working with established enterprise-level databases.
+
+    Still Essential: While often viewed as a basic tool, Excel remains a frequently listed requirement, likely for quick ad-hoc analysis and reporting to non-technical stakeholders.
+
+
+JSON Export
+[
+  {
+    "job_id": 339646,
+    "job_title": "Data Sector Analyst - Hedge Fund in Midtown",
+    "salary_year_avg": "240000.0",
+    "company_name": "Coda Search│Staffing",
+    "skills": "sql"
+  },
+  {
+    "job_id": 339646,
+    "job_title": "Data Sector Analyst - Hedge Fund in Midtown",
+    "salary_year_avg": "240000.0",
+    "company_name": "Coda Search│Staffing",
+    "skills": "python"
+  },
+  {
+    "job_id": 339646,
+    "job_title": "Data Sector Analyst - Hedge Fund in Midtown",
+    "salary_year_avg": "240000.0",
+    "company_name": "Coda Search│Staffing",
+    "skills": "pandas"
+  },
+  {
+    "job_id": 841064,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "sql"
+  },
+  {
+    "job_id": 841064,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "python"
+  },
+  {
+    "job_id": 841064,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "r"
+  },
+  {
+    "job_id": 841064,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "express"
+  },
+  {
+    "job_id": 1713491,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "sql"
+  },
+  {
+    "job_id": 1713491,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "python"
+  },
+  {
+    "job_id": 1713491,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "r"
+  },
+  {
+    "job_id": 1713491,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "239777.5",
+    "company_name": "TikTok",
+    "skills": "express"
+  },
+  {
+    "job_id": 204500,
+    "job_title": "Reference Data Analyst",
+    "salary_year_avg": "225000.0",
+    "company_name": "Selby Jennings",
+    "skills": "sql"
+  },
+  {
+    "job_id": 204500,
+    "job_title": "Reference Data Analyst",
+    "salary_year_avg": "225000.0",
+    "company_name": "Selby Jennings",
+    "skills": "python"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "sql"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "neo4j"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "elasticsearch"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "sql server"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "aws"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "oracle"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "spark"
+  },
+  {
+    "job_id": 1563879,
+    "job_title": "Data Analysis Manager",
+    "salary_year_avg": "185000.0",
+    "company_name": "Pronix Inc",
+    "skills": "kafka"
+  },
+  {
+    "job_id": 396924,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "181177.5",
+    "company_name": "TikTok",
+    "skills": "sql"
+  },
+  {
+    "job_id": 396924,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "181177.5",
+    "company_name": "TikTok",
+    "skills": "python"
+  },
+  {
+    "job_id": 396924,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "181177.5",
+    "company_name": "TikTok",
+    "skills": "r"
+  },
+  {
+    "job_id": 396924,
+    "job_title": "Investigations and Insights Lead Data Analyst - USDS",
+    "salary_year_avg": "181177.5",
+    "company_name": "TikTok",
+    "skills": "express"
+  },
+  {
+    "job_id": 386504,
+    "job_title": "Data Associate, Investor Relations",
+    "salary_year_avg": "180000.0",
+    "company_name": "Brewer Morris",
+    "skills": "python"
+  },
+  {
+    "job_id": 386504,
+    "job_title": "Data Associate, Investor Relations",
+    "salary_year_avg": "180000.0",
+    "company_name": "Brewer Morris",
+    "skills": "excel"
+  },
+  {
+    "job_id": 386504,
+    "job_title": "Data Associate, Investor Relations",
+    "salary_year_avg": "180000.0",
+    "company_name": "Brewer Morris",
+    "skills": "tableau"
+  },
+  {
+    "job_id": 386504,
+    "job_title": "Data Associate, Investor Relations",
+    "salary_year_avg": "180000.0",
+    "company_name": "Brewer Morris",
+    "skills": "power bi"
+  },
+  {
+    "job_id": 1468996,
+    "job_title": "Data Analyst & Investor Relations",
+    "salary_year_avg": "175000.0",
+    "company_name": "Marlowe Partners LP",
+    "skills": "excel"
+  },
+  {
+    "job_id": 1468996,
+    "job_title": "Data Analyst & Investor Relations",
+    "salary_year_avg": "175000.0",
+    "company_name": "Marlowe Partners LP",
+    "skills": "powerpoint"
+  },
+  {
+    "job_id": 415878,
+    "job_title": "Cloud Financial Data Analyst, Director - Financial Operations (FinOps)",
+    "salary_year_avg": "175000.0",
+    "company_name": "Smarsh",
+    "skills": "aws"
+  },
+  {
+    "job_id": 415878,
+    "job_title": "Cloud Financial Data Analyst, Director - Financial Operations (FinOps)",
+    "salary_year_avg": "175000.0",
+    "company_name": "Smarsh",
+    "skills": "gcp"
+  },
+  {
+    "job_id": 415878,
+    "job_title": "Cloud Financial Data Analyst, Director - Financial Operations (FinOps)",
+    "salary_year_avg": "175000.0",
+    "company_name": "Smarsh",
+    "skills": "excel"
+  }
+]
+*/
